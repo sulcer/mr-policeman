@@ -42,7 +42,7 @@ const LoginForm: FC = () => {
             Forgotten password?
           </Link>
           <Button
-            classname="bg-blue-500 mt-5"
+            classname="bg-navy-blue mt-5"
             text={'Log in'}
             onPress={() => console.log('Pressed')}
           />
