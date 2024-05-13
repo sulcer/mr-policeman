@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View } from 'react-native';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SignInCredentialsSchema } from '@/schemas/user.schema';
 import { SignInCredentialsType } from '@/types/user.types';
