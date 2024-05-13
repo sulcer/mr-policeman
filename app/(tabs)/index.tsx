@@ -7,7 +7,7 @@ const LandingScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       router.replace('/login');
-    }, 10000);
+    }, 5000);
   }, []);
 
   return (
