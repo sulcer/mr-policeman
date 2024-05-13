@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { router } from 'expo-router';
+import LottieView from 'lottie-react-native';
 
 const LandingScreen = () => {
   useEffect(() => {
@@ -11,7 +12,15 @@ const LandingScreen = () => {
 
   return (
     <View className={'flex-1 justify-center items-center'}>
-      <Text className={'text-gray-500'}>Landing Screen</Text>
+      <LottieView
+        style={{ width: 250, height: 250 }}
+        source={require('../../assets/lottie/police-animation.json')}
+        autoPlay
+        loop
+      />
+      <Text className={'text-black font-bold text-2xl dark:text-white'}>
+        Mister Policeman
+      </Text>
     </View>
   );
 };
