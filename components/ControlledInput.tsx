@@ -45,10 +45,6 @@ const ControlledInputInner: FC<TextInputProps> = ({
     field.onBlur();
   };
 
-  const toggleLabel = () => {
-    setIsFocused(!isFocused);
-  };
-
   return (
     <View className={twMerge('bg-transparent w-full', classNameContainer)}>
       <Text
