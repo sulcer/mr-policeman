@@ -45,10 +45,19 @@ const ControlledInputInner: FC<TextInputProps> = ({
     field.onBlur();
   };
 
+  const toggleLabel = () => {
+    setIsFocused(!isFocused);
+  };
+
   return (
     <View className={twMerge('bg-transparent w-full', classNameContainer)}>
-      <Text className={twMerge('dark:text-white mb-3 ml-0.5', classNameLabel)}>
-        {label}
+      <Text
+        className={twMerge(
+          'dark:text-white mb-1.5 ml-0.5 transition-all duration-500 ease-in-out',
+          classNameLabel
+        )}
+      >
+        {isFocused && label}
       </Text>
       <View>
         <RNTextInput
@@ -64,6 +73,7 @@ const ControlledInputInner: FC<TextInputProps> = ({
           onFocus={() => setIsFocused(true)}
           onBlur={onBlur}
           value={field.value}
+          placeholder={isFocused ? '' : label}
           {...inputProps}
         />
 

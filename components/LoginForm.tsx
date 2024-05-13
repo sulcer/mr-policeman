@@ -27,7 +27,6 @@ const LoginForm: FC = () => {
           <ControlledInput
             name="email"
             label="Email"
-            placeholder="user@email.com"
             keyboardType="email-address"
           />
           <ControlledInput
@@ -35,7 +34,6 @@ const LoginForm: FC = () => {
             label="Password"
             secureTextEntry
             classNameContainer="mt-5"
-            placeholder="**********"
           />
           <FormError form={form} />
           <Link className="mt-5" href={'/forgottenPassword'}>
