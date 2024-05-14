@@ -1,7 +1,6 @@
 import * as z from 'zod';
 import {
   BaseRegisterSchema,
-  ChangePasswordSchema,
   ForgotPasswordSchema,
   SignInCredentialsSchema,
 } from '@/schemas/user.schema';
@@ -9,8 +8,6 @@ import {
 export type BaseRegisterType = z.infer<typeof BaseRegisterSchema>;
 
 export type SignInCredentialsType = z.infer<typeof SignInCredentialsSchema>;
-
-export type ChangePasswordType = z.infer<typeof ChangePasswordSchema>;
 
 export type ForgotPasswordType = z.infer<typeof ForgotPasswordSchema>;
 

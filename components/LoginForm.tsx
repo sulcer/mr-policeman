@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SignInCredentialsSchema } from '@/schemas/user.schema';
 import { SignInCredentialsType } from '@/types/user.types';
@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ControlledInput } from '@/components/ControlledInput';
 import FormError from '@/components/FormError';
 import Button from '@/components/Button';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
 const DefaultLoginData: SignInCredentialsType = {
   email: '',
@@ -36,16 +36,20 @@ const LoginForm: FC = () => {
             classNameContainer="mt-5"
           />
           <FormError form={form} />
-          <Link className="mt-5" href={'/forgottenPassword'}>
+          <Link
+            className="mt-5 font-semibold text-right"
+            href={'/reset-password'}
+          >
             Forgotten password?
           </Link>
           <Button
             classname="bg-navy-blue mt-5"
             text={'Log in'}
-            onPress={() => console.log('Pressed')}
+            onPress={() => router.navigate('home')}
           />
           <Link className="mt-5 text-center" href={'/register'}>
-            Don't have an account? Register here
+            Don't have an account?{' '}
+            <Text className="text-navy-blue font-semibold">Register here</Text>
           </Link>
         </FormProvider>
       </View>
