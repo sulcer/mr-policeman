@@ -24,3 +24,12 @@ export const ForgotPasswordSchema = z.object({
     message: 'Entered email is not valid',
   }),
 });
+
+export const ChangePasswordSchema = z.object({
+  password: z
+    .string()
+    .min(6, { message: 'Geslo mora vsebovati vsaj 6 znakov' }),
+  newPassword: z
+    .string()
+    .min(6, { message: 'Geslo mora vsebovati vsaj 6 znakov' }),
+});
