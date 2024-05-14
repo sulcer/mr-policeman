@@ -45,7 +45,7 @@ const LoginForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Log in'}
-            onPress={() => router.navigate('home')}
+            onPress={() => router.navigate('onboarding')}
           />
           <Link className="mt-5 text-center" href={'/register'}>
             Don't have an account?{' '}
