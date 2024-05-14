@@ -39,7 +39,9 @@ const Onboarding = () => {
 
   return (
     <View
-      className={'flex-1 pt-52 items-center bg-white dark:bg-transparent'}
+      className={
+        'flex-1 pt-5 items-center justify-center bg-white dark:bg-transparent gap-y-8'
+      }
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -47,7 +49,7 @@ const Onboarding = () => {
         source={onboardingSteps[step].image}
         className={'w-72 h-72 rounded-full'}
       />
-      <View className={'flex items-center my-8 h-20 w-2/3'}>
+      <View className={'flex items-center h-20 w-2/3'}>
         <Text className={'dark:text-white font-bold text-2xl'}>
           {onboardingSteps[step].title}
         </Text>
@@ -65,15 +67,15 @@ const Onboarding = () => {
           ></View>
         ))}
       </View>
-      {step === 2 && (
-        <View className={'w-24'}>
+      <View className={'w-24 h-10'}>
+        {step === 2 && (
           <Button
-            classname="bg-navy-blue mt-10"
+            classname="bg-navy-blue"
             text={'Got it'}
             onPress={() => router.navigate('home')}
           />
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 };
