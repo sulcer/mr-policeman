@@ -49,7 +49,7 @@ const ControlledInputInner: FC<TextInputProps> = ({
     <View className={twMerge('bg-transparent w-full', classNameContainer)}>
       <Text
         className={twMerge(
-          'dark:text-white mb-1.5 ml-0.5 transition-all duration-500 ease-in-out',
+          'dark:text-white ml-0.5 transition-all duration-500 ease-in-out h-5',
           classNameLabel
         )}
       >
@@ -60,7 +60,7 @@ const ControlledInputInner: FC<TextInputProps> = ({
           autoCapitalize="none"
           textAlign="left"
           className={twMerge(
-            'rounded-md dark:bg-dark-element dark:text-white py-3 px-4',
+            'rounded-md dark:bg-dark-element dark:text-white py-3 px-4 fixed',
             classNameInput,
             isFocused ? 'border-tint border' : 'border border-dark-element',
             editable ? 'opacity-100' : 'opacity-60'
