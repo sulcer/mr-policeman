@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { View, Text, TextInput, TextInputProps } from 'react-native';
+import { View, TextInput, TextInputProps } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 interface InputProps extends TextInputProps {
-  label: string;
   value: string;
   onChangeText: (text: string) => void;
   className?: string;
@@ -11,7 +10,6 @@ interface InputProps extends TextInputProps {
   classNameContainer?: string;
 }
 const Input: FC<InputProps> = ({
-  label,
   value,
   onChangeText,
   className,
@@ -21,9 +19,6 @@ const Input: FC<InputProps> = ({
 }) => {
   return (
     <View className={twMerge('bg-transparent w-full', classNameContainer)}>
-      <Text className={twMerge('dark:text-white mb-3 ml-0.5', classNameLabel)}>
-        {label}
-      </Text>
       <TextInput
         className={twMerge(
           'shadow-lg shadow-black rounded-md dark:bg-dark-element dark:text-white py-3 px-4',
