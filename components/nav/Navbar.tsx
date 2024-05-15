@@ -3,6 +3,7 @@ import { Pressable, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import BottomDrawer from '@/components/BottomDrawer';
+import AddControlForm from '@/components/AddControlForm';
 
 const Navbar: FC = () => {
   return (
@@ -30,6 +31,7 @@ const Navbar: FC = () => {
       >
         <BottomDrawer
           children={<Ionicons name={'add-outline'} size={24} color={'white'} />}
+          content={<AddControlForm />}
         />
       </Pressable>
     </View>

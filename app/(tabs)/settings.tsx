@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import ChangePasswordForm from '@/components/ChangePasswordForm';
-import NotificationsSettings from '@/components/NotificationsSettings';
+import Toggle from '@/components/Toggle';
 import Button from '@/components/Button';
 
 const Settings = () => {
@@ -19,7 +19,17 @@ const Settings = () => {
         <View className={'h-60'}>
           <ChangePasswordForm />
         </View>
-        <NotificationsSettings />
+        <Toggle
+          children={
+            <>
+              <Text className={'text-xl font-bold dark:text-white'}>
+                Notifications
+              </Text>
+              <Text className={'text-gray-500'}>Enable push notifications</Text>
+            </>
+          }
+          classNameContainer={'mx-5'}
+        />
       </View>
 
       <View className={'px-5'}>

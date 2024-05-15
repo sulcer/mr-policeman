@@ -10,9 +10,10 @@ import {
 
 interface BottomDrawerProps {
   children: React.ReactNode;
+  content: React.ReactNode;
 }
 
-const BottomDrawer: FC<BottomDrawerProps> = ({ children }) => {
+const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
   const windowHeight = Dimensions.get('window').height;
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -51,15 +52,14 @@ const BottomDrawer: FC<BottomDrawerProps> = ({ children }) => {
               width: '100%',
               justifyContent: 'flex-end',
               flexDirection: 'row',
+              paddingHorizontal: 25,
             }}
           >
             <TouchableOpacity onPress={handleCloseBottomSheet}>
               <Text>X</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ paddingVertical: 16 }}>
-            <Text>Content</Text>
-          </View>
+          <View style={{ width: '100%', flex: 1 }}>{content}</View>
         </View>
       </Modal>
     </View>
@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    paddingVertical: 23,
-    paddingHorizontal: 25,
     bottom: 0,
+    paddingTop: 5,
   },
 });
