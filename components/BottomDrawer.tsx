@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react';
 import {
   Modal,
   View,
-  Text,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface BottomDrawerProps {
   children: React.ReactNode;
@@ -53,10 +53,11 @@ const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
               justifyContent: 'flex-end',
               flexDirection: 'row',
               paddingHorizontal: 25,
+              marginTop: 3,
             }}
           >
             <TouchableOpacity onPress={handleCloseBottomSheet}>
-              <Text>X</Text>
+              <Ionicons name={'close-outline'} size={24} color={'gray'} />
             </TouchableOpacity>
           </View>
           <View style={{ width: '100%', flex: 1 }}>{content}</View>
