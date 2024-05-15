@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
-import { Pressable, View } from 'react-native';
+import React, { FC, useState } from 'react';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
+import BottomDrawer from '@/components/BottomDrawer';
 
 const Navbar: FC = () => {
   return (
@@ -14,17 +15,22 @@ const Navbar: FC = () => {
         className={
           'w-12 h-12 rounded-full bg-gray-400 items-center justify-center'
         }
-        onPress={() => router.navigate('settings')}
       >
-        <Ionicons name={'settings-outline'} size={24} color={'white'} />
+        <TouchableOpacity
+          onPress={() => router.navigate('settings')}
+          className={'p-3'}
+        >
+          <Ionicons name={'settings-outline'} size={24} color={'white'} />
+        </TouchableOpacity>
       </Pressable>
       <Pressable
         className={
           'w-12 h-12 rounded-full bg-navy-blue items-center justify-center'
         }
-        onPress={() => console.log('Add button pressed')}
       >
-        <Ionicons name={'add-outline'} size={24} color={'white'} />
+        <BottomDrawer
+          children={<Ionicons name={'add-outline'} size={24} color={'white'} />}
+        />
       </Pressable>
     </View>
   );
