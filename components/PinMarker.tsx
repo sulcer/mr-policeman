@@ -15,7 +15,17 @@ const PinMarker: FC = () => {
           children={
             <Ionicons name={'location-outline'} size={15} color={'black'} />
           }
-          content={<Control />}
+          content={
+            <Control
+              name={'Pri Hugeji'}
+              location={'Jurovski Dol'}
+              date={'16.5.2024'}
+              description={'Radar in kontrola alkohola!'}
+              type={'radar'}
+              upVotes={10}
+              downVotes={0}
+            />
+          }
         />
       </Pressable>
     </View>
