@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import IconWrapper from '@/components/IconWrapper';
 
 const Control = () => {
   return (
@@ -18,42 +19,25 @@ const Control = () => {
 
         <View className={'flex flex-row justify-between mx-5'}>
           <View>
-            <Pressable
-              className={
-                'w-12 h-12 rounded-full bg-navy-blue items-center justify-center'
-              }
+            <IconWrapper
+              onPress={() => console.log('up')}
+              classNameContainer={'w-12 h-12 bg-navy-blue'}
             >
-              <TouchableOpacity
-                onPress={() => console.log('up')}
-                className={'p-3'}
-              >
-                <Ionicons name={'arrow-up-outline'} size={24} color={'white'} />
-              </TouchableOpacity>
-            </Pressable>
+              <Ionicons name={'arrow-up-outline'} size={24} color={'white'} />
+            </IconWrapper>
             <Text
               className={'text-black dark:text-white text-center mt-1 text-xl'}
             >
               10
             </Text>
           </View>
-
           <View>
-            <Pressable
-              className={
-                'w-12 h-12 rounded-full bg-navy-blue items-center justify-center'
-              }
+            <IconWrapper
+              onPress={() => console.log('down')}
+              classNameContainer={'w-12 h-12 bg-navy-blue'}
             >
-              <TouchableOpacity
-                onPress={() => console.log('home')}
-                className={'p-3'}
-              >
-                <Ionicons
-                  name={'arrow-down-outline'}
-                  size={24}
-                  color={'white'}
-                />
-              </TouchableOpacity>
-            </Pressable>
+              <Ionicons name={'arrow-down-outline'} size={24} color={'white'} />
+            </IconWrapper>
             <Text
               className={'text-black dark:text-white text-center mt-1 text-xl'}
             >
