@@ -54,6 +54,7 @@ const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
               flexDirection: 'row',
               paddingHorizontal: 25,
               marginTop: 3,
+              zIndex: 1,
             }}
           >
             <TouchableOpacity onPress={handleCloseBottomSheet}>
