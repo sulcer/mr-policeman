@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Pressable, TouchableOpacity, View } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Pressable, TouchableOpacity } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 interface IconWrapperProps {
