@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
@@ -6,6 +6,11 @@ import BottomDrawer from '@/components/BottomDrawer';
 import AddControlForm from '@/components/AddControlForm';
 
 const Navbar: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  const onChange = (b: boolean) => setIsOpen(b)
+
   return (
     <View
       className={
@@ -30,6 +35,8 @@ const Navbar: FC = () => {
         }
       >
         <BottomDrawer
+          open={isOpen}
+          handleChange={onChange}
           children={<Ionicons name={'add-outline'} size={24} color={'white'} />}
           content={<AddControlForm />}
         />

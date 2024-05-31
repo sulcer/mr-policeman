@@ -1,15 +1,31 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, TouchableOpacity, View } from 'react-native';
 import ChangePasswordForm from '@/components/ChangePasswordForm';
 import Toggle from '@/components/Toggle';
 import Button from '@/components/Button';
+import { router } from 'expo-router';
+import { AntDesign } from '@expo/vector-icons';
 
 const Settings = () => {
   return (
     <View className={'flex flex-col h-full pt-32 pb-8'}>
       <View className={'flex-1'}>
         <View className={'px-5'}>
-          <Text className={'text-3xl font-bold dark:text-white'}>Settings</Text>
+          <View className={"flex flex-col"}>
+            <Pressable
+              className={
+                'w-12 h-12'
+              }
+            >
+              <TouchableOpacity
+                onPress={() => router.navigate('home')}
+                className={'p-3'}
+              >
+                <AntDesign name="arrowleft" size={24} color="black" />
+              </TouchableOpacity>
+            </Pressable>
+          </View>
+            <Text className={'text-3xl font-bold dark:text-white'}>Settings</Text>
           <Text className={'dark:text-white'}>Change your preferences</Text>
         </View>
         <View className={'px-5 mt-5'}>

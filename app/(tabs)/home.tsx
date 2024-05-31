@@ -1,17 +1,16 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import {  View } from 'react-native';
 import Navbar from '@/components/nav/Navbar';
-import Map from '@/assets/images/map.png';
 import SearchBar from '@/components/SearchBar';
-import PinMarker from '@/components/PinMarker';
+import Map from '@/components/Map';
 
 const Home = () => {
   return (
     <View className={'flex-1 w-full relative'}>
-      <Image source={Map} />
       <SearchBar />
-      <PinMarker />
+      {/*<PinMarker />*/}
       <Navbar />
+      <Map/>
     </View>
   );
 };

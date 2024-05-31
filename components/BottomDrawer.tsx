@@ -11,25 +11,18 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 interface BottomDrawerProps {
   children: React.ReactNode;
   content: React.ReactNode;
+  open: boolean;
+  handleChange: (b: boolean) => void;
 }
 
-const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
+const BottomDrawer: FC<BottomDrawerProps> = ({ children, content, open,handleChange }) => {
   const windowHeight = Dimensions.get('window').height;
 
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const handleOpenBottomSheet = () => {
-    setIsBottomSheetOpen(true);
-  };
-
-  const handleCloseBottomSheet = () => {
-    setIsBottomSheetOpen(false);
-  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={handleOpenBottomSheet}
+        onPress={()=>handleChange(true)}
         style={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -42,8 +35,8 @@ const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={isBottomSheetOpen}
-        onRequestClose={handleCloseBottomSheet}
+        visible={open}
+        onRequestClose={()=>handleChange(false)}
       >
         <View style={[styles.bottomSheet, { height: windowHeight * 0.6 }]}>
           <View
@@ -57,7 +50,7 @@ const BottomDrawer: FC<BottomDrawerProps> = ({ children, content }) => {
               zIndex: 1,
             }}
           >
-            <TouchableOpacity onPress={handleCloseBottomSheet}>
+            <TouchableOpacity onPress={()=>handleChange(false)}>
               <Ionicons name={'close-outline'} size={24} color={'gray'} />
             </TouchableOpacity>
           </View>
