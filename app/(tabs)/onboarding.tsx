@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import stepOneOnboardingImage from '@/assets/images/first-onboarding.png';
 import stepTwoOnboardingImage from '@/assets/images/second-onboarding.png';
@@ -6,6 +6,7 @@ import stepThreeOnboardingImage from '@/assets/images/third-onboarding.png';
 import { useSwipe } from '@/hooks/useSwipe';
 import Button from '@/components/Button';
 import { router } from 'expo-router';
+import { isOnboardingComplete, setOnboardingComplete } from '@/storage/onboarding';
 
 const onboardingSteps = [
   {
@@ -29,13 +30,30 @@ const Onboarding = () => {
   const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight, 6);
   const [step, setStep] = React.useState(0);
 
-  function onSwipeLeft() {
+  async function onSwipeLeft() {
     setStep((prevStep) => Math.min(prevStep + 1, 2));
   }
 
   function onSwipeRight() {
     setStep((prevStep) => Math.max(prevStep - 1, 0));
   }
+
+  const handleOnboardingComplete = async () => {
+    if (step === 2) {
+      await setOnboardingComplete();
+      router.navigate('home');
+    }
+  };
+
+  useEffect(() => {
+    const navigateToHome = async () => {
+      const onboarding = await isOnboardingComplete();
+      if (onboarding) {
+        router.navigate('home');
+      }
+    };
+    navigateToHome();
+  }, []);
 
   return (
     <View
@@ -72,7 +90,7 @@ const Onboarding = () => {
           <Button
             classname="bg-navy-blue"
             text={'Got it'}
-            onPress={() => router.navigate('home')}
+            onPress={handleOnboardingComplete}
           />
         )}
       </View>
