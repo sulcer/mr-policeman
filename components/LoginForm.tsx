@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SignInCredentialsSchema } from '@/schemas/user.schema';
@@ -8,6 +8,9 @@ import { ControlledInput } from '@/components/ControlledInput';
 import FormError from '@/components/FormError';
 import Button from '@/components/Button';
 import { Link, router } from 'expo-router';
+import { useSignIn } from '@/api/auth';
+import { useSession } from '@/hooks/useSession';
+import { getUser } from '@/db/user';
 
 const DefaultLoginData: SignInCredentialsType = {
   email: '',
@@ -19,6 +22,29 @@ const LoginForm: FC = () => {
     resolver: zodResolver(SignInCredentialsSchema),
     defaultValues: DefaultLoginData,
   });
+
+  const session = useSession();
+
+  const { mutate } = useSignIn({
+    onSuccess: (data) => {
+      session.login(data);
+      router.navigate('onboarding');
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const user = await getUser();
+      if (user) {
+        session.login(user);
+        router.navigate('onboarding');
+      }
+    };
+    checkSession()
+  }, []);
 
   return (
     <View className="flex-1 w-full">
@@ -45,7 +71,7 @@ const LoginForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Log in'}
-            onPress={() => router.navigate('onboarding')}
+            onPress={() => mutate(form.getValues())}
           />
           <Link className="mt-5 text-center" href={'/register'}>
             Don't have an account?{' '}

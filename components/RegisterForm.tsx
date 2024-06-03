@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { BaseRegisterSchema } from '@/schemas/user.schema';
 import { BaseRegisterType } from '@/types/user.types';
 import { router } from 'expo-router';
+import { useSignUp } from '@/api/auth';
 
 const DefaultRegisterData: BaseRegisterType = {
   email: '',
@@ -19,6 +20,15 @@ const RegisterForm: FC = () => {
   const form = useForm({
     resolver: zodResolver(BaseRegisterSchema),
     defaultValues: DefaultRegisterData,
+  });
+
+  const { mutate } = useSignUp({
+    onSuccess: () => {
+      router.navigate('login');
+    },
+    onError: (error) => {
+      console.error(error);
+    },
   });
 
   return (
@@ -46,7 +56,7 @@ const RegisterForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Register'}
-            onPress={() => router.navigate('login')}
+            onPress={() => mutate(form.getValues())}
           />
         </FormProvider>
       </View>
