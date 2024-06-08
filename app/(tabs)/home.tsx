@@ -5,6 +5,8 @@ import SearchBar from '@/components/SearchBar';
 import Map from '@/components/Map';
 import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as geolib from 'geolib';
+import Toast from 'react-native-toast-message';
 
 const Home = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -52,6 +54,30 @@ const Home = () => {
   const saveUsersLocation = async () => {
     await AsyncStorage.setItem('location', JSON.stringify(location));
   };
+
+  useEffect(() => {
+    if (location) {
+      // TODO:  check if any control is near
+      const distance = geolib.getDistance(
+        {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        },
+        { latitude: 46.6048288, longitude: 15.7869497 }
+      );
+
+      console.log('Distance:', distance);
+      console.log(location.coords.latitude, location.coords.longitude);
+
+      if (distance < 5000) {
+        Toast.show({
+          type: 'error',
+          text1: 'You are near a control! 👮🏽‍️',
+          text2: 'Drive carefully!',
+        });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     if (location) {

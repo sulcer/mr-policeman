@@ -8,7 +8,6 @@ import { Marker } from 'react-native-maps';
 const PinMarker: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-
   return (
     <Pressable
       className={'mt-10 w-10 h-10 rounded-full items-center justify-center'}
@@ -17,7 +16,10 @@ const PinMarker: FC = () => {
         open={isOpen}
         handleChange={setIsOpen}
         children={
-          <Marker coordinate={{ latitude: 46, longitude: 15 }} onPress={() => setIsOpen(true)} />
+          <Marker
+            coordinate={{ latitude: 46.6048288, longitude: 15.7869497 }}
+            onPress={() => setIsOpen(true)}
+          />
         }
         content={
           <Control
@@ -32,7 +34,6 @@ const PinMarker: FC = () => {
         }
       />
     </Pressable>
-
   );
 };
 
