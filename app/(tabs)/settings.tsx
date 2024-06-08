@@ -5,27 +5,28 @@ import Toggle from '@/components/Toggle';
 import Button from '@/components/Button';
 import { router } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
+import { useSession } from '@/hooks/useSession';
 
 const Settings = () => {
+  const session = useSession();
+
+  const logOut = async () => {
+    session.logout();
+    router.navigate('login');
+  };
+
   return (
-    <View className={'flex flex-col h-full pt-32 pb-8'}>
+    <View className={'flex flex-col h-full pt-14 pb-8'}>
       <View className={'flex-1'}>
         <View className={'px-5'}>
-          <View className={"flex flex-col"}>
-            <Pressable
-              className={
-                'w-12 h-12'
-              }
-            >
-              <TouchableOpacity
-                onPress={() => router.navigate('home')}
-                className={'p-3'}
-              >
+          <View className={'flex flex-col'}>
+            <Pressable className={'w-12 h-12'}>
+              <TouchableOpacity onPress={() => router.navigate('home')}>
                 <AntDesign name="arrowleft" size={24} color="black" />
               </TouchableOpacity>
             </Pressable>
           </View>
-            <Text className={'text-3xl font-bold dark:text-white'}>Settings</Text>
+          <Text className={'text-3xl font-bold dark:text-white'}>Settings</Text>
           <Text className={'dark:text-white'}>Change your preferences</Text>
         </View>
         <View className={'px-5 mt-5'}>
@@ -49,11 +50,7 @@ const Settings = () => {
       </View>
 
       <View className={'px-5'}>
-        <Button
-          classname="bg-red-600 mt-5"
-          text={'Delete Account'}
-          onPress={() => console.log('Delete account!')}
-        />
+        <Button classname="bg-red-600 mt-5" text={'Log Out'} onPress={logOut} />
       </View>
     </View>
   );

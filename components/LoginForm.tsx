@@ -43,7 +43,7 @@ const LoginForm: FC = () => {
         router.navigate('onboarding');
       }
     };
-    checkSession()
+    checkSession();
   }, []);
 
   return (
@@ -64,7 +64,7 @@ const LoginForm: FC = () => {
           <FormError form={form} />
           <Link
             className="mt-5 font-semibold text-right"
-            href={'/reset-password'}
+            href={'/forgotten-password'}
           >
             Forgotten password?
           </Link>

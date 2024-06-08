@@ -1,10 +1,10 @@
 import React from 'react';
 import { Pressable, Text, TouchableOpacity, View } from 'react-native';
-import RegisterForm from '@/components/RegisterForm';
+import ResetPasswordForm from '@/components/ResetPasswordForm';
 import { router } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 
-const RegisterScreen = () => {
+const ForgottenPassword = () => {
   return (
     <View className={'flex-1 w-full mt-14'}>
       <View className={'px-5 mb-5'}>
@@ -16,15 +16,13 @@ const RegisterScreen = () => {
           </Pressable>
         </View>
         <Text className={'text-3xl font-bold dark:text-white'}>
-          Registration
+          Forgotten Password
         </Text>
-        <Text className={'dark:text-white'}>
-          Join platform Mister Policeman
-        </Text>
+        <Text className={'dark:text-white'}>Reset your password here</Text>
       </View>
-      <RegisterForm />
+      <ResetPasswordForm />
     </View>
   );
 };
 
-export default RegisterScreen;
+export default ForgottenPassword;
