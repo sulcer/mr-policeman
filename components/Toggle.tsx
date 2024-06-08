@@ -1,15 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { View, Switch } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 interface ToggleSwitchProps {
   children?: React.ReactNode;
   classNameContainer?: string;
+  action?: () => void;
 }
 
-const Toggle: FC<ToggleSwitchProps> = ({ children, classNameContainer }) => {
+const Toggle: FC<ToggleSwitchProps> = ({
+  children,
+  classNameContainer,
+  action,
+}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  useEffect(() => {
+    if (action) {
+      action();
+    }
+  }, [isEnabled]);
 
   return (
     <View

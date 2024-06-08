@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, Text, TouchableOpacity, View } from 'react-native';
 import ChangePasswordForm from '@/components/ChangePasswordForm';
 import Toggle from '@/components/Toggle';
@@ -6,13 +6,31 @@ import Button from '@/components/Button';
 import { router } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 import { useSession } from '@/hooks/useSession';
+import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Settings = () => {
   const session = useSession();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   const logOut = async () => {
     session.logout();
     router.navigate('login');
+  };
+
+  const toggleNotifications = async () => {
+    try {
+      const newValue = !notificationsEnabled;
+      setNotificationsEnabled(newValue);
+      await AsyncStorage.setItem('notifications', newValue.toString());
+      Toast.show({
+        type: 'info',
+        text1: 'Info',
+        text2: newValue ? 'Notifications enabled' : 'Notifications disabled',
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -37,6 +55,7 @@ const Settings = () => {
           <ChangePasswordForm />
         </View>
         <Toggle
+          action={toggleNotifications}
           children={
             <>
               <Text className={'text-xl font-bold dark:text-white'}>
