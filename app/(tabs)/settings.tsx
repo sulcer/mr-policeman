@@ -51,7 +51,7 @@ const Settings = () => {
           <Text className={'text-xl font-bold dark:text-white'}>User</Text>
           <Text className={'text-gray-500'}>Change password</Text>
         </View>
-        <View className={'h-60'}>
+        <View className={'h-60 mb-5'}>
           <ChangePasswordForm />
         </View>
         <Toggle
