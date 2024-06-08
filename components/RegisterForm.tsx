@@ -31,6 +31,11 @@ const RegisterForm: FC = () => {
     },
   });
 
+  const onSubmit = (data: BaseRegisterType) => {
+    mutate(data);
+    form.reset(DefaultRegisterData);
+  };
+
   return (
     <View className="flex-1 w-full">
       <View className="px-5">
@@ -56,7 +61,7 @@ const RegisterForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Register'}
-            onPress={() => mutate(form.getValues())}
+            onPress={form.handleSubmit(onSubmit)}
           />
         </FormProvider>
       </View>

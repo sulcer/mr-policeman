@@ -74,7 +74,7 @@ const ControlledInputInner: FC<TextInputProps> = ({
         />
 
         {!!errorMessage && (
-          <Text className={twMerge('pl-0.5 text-warning pt-1.5')}>
+          <Text className={twMerge('pl-0.5 text-red-600 pt-1.5')}>
             {errorMessage}
           </Text>
         )}

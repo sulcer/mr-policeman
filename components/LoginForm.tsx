@@ -46,6 +46,10 @@ const LoginForm: FC = () => {
     checkSession();
   }, []);
 
+  const onSubmit = (data: SignInCredentialsType) => {
+    mutate(data);
+  };
+
   return (
     <View className="flex-1 w-full">
       <View className="px-5">
@@ -71,7 +75,7 @@ const LoginForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Log in'}
-            onPress={() => mutate(form.getValues())}
+            onPress={form.handleSubmit(onSubmit)}
           />
           <Link className="mt-5 text-center" href={'/register'}>
             Don't have an account?{' '}
