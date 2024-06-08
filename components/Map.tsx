@@ -1,8 +1,7 @@
 import React from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import PinMarker from '@/components/PinMarker';
-
 
 const Map = () => {
   return (
