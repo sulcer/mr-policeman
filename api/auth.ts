@@ -21,6 +21,10 @@ export type ChangePasswordDto = {
   newPassword: string;
 };
 
+export type ForgotPasswordDto = {
+  email: string;
+};
+
 const signIn = async (dto: SignInDto) => {
   const res = await apiInstance.post('/auth/sign-in', dto);
   return res.data as Session;
@@ -66,6 +70,20 @@ export const useChangePassword = (
   return useMutation({
     mutationKey: ['change-password'],
     mutationFn: changePassword,
+    ...opts,
+  });
+};
+
+export const forgotPassword = async (dto: ForgotPasswordDto) => {
+  return true;
+};
+
+export const useForgotPassword = (
+  opts?: UseMutationOptions<boolean, Error, ForgotPasswordDto, unknown>
+) => {
+  return useMutation({
+    mutationKey: ['forgot-password'],
+    mutationFn: forgotPassword,
     ...opts,
   });
 };

@@ -8,6 +8,8 @@ import Button from '@/components/Button';
 import { ControlledInput } from '@/components/ControlledInput';
 import FormError from '@/components/FormError';
 import { router } from 'expo-router';
+import { useForgotPassword } from '@/api/auth';
+import Toast from 'react-native-toast-message';
 
 const DefaultResetPasswordData: ForgotPasswordType = {
   email: '',
@@ -18,6 +20,29 @@ const ResetPasswordForm: FC = () => {
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: DefaultResetPasswordData,
   });
+
+  const { mutate } = useForgotPassword({
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Password reset email sent successfully',
+      });
+      router.navigate('login');
+    },
+    onError: (error) => {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: error.message,
+      });
+    },
+  });
+
+  const onSubmit = (data: ForgotPasswordType) => {
+    mutate(data);
+    form.reset(DefaultResetPasswordData);
+  };
 
   return (
     <View className="flex-1 w-full">
@@ -32,7 +57,7 @@ const ResetPasswordForm: FC = () => {
           <Button
             classname="bg-navy-blue mt-5"
             text={'Reset Password'}
-            onPress={() => router.navigate('login')}
+            onPress={form.handleSubmit(onSubmit)}
           />
         </FormProvider>
       </View>

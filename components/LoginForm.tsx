@@ -48,6 +48,7 @@ const LoginForm: FC = () => {
 
   const onSubmit = (data: SignInCredentialsType) => {
     mutate(data);
+    form.reset(DefaultLoginData);
   };
 
   return (
