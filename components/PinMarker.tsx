@@ -1,11 +1,18 @@
-import React, { FC, useState } from 'react';
-import { Pressable } from 'react-native';
+import React, {  ReactNode, useState } from 'react';
+import { Pressable, Text, View, Image, ImageSourcePropType } from 'react-native';
 import BottomDrawer from '@/components/BottomDrawer';
-import Control from '@/components/Control';
 import { Marker } from 'react-native-maps';
 
-// TODO: needs to change based on map provider!
-const PinMarker: FC = () => {
+
+
+interface PinMarkerProps {
+  latitude: number;
+  longitude: number;
+  content: ReactNode;
+  image: ImageSourcePropType;
+}
+
+const PinMarker = ({ latitude, longitude, content, image }: PinMarkerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,21 +24,15 @@ const PinMarker: FC = () => {
         handleChange={setIsOpen}
         children={
           <Marker
-            coordinate={{ latitude: 46.6048288, longitude: 15.7869497 }}
+            coordinate={{ latitude: latitude, longitude: longitude }}
             onPress={() => setIsOpen(true)}
-          />
+          >
+            <View>
+              <Image source={image} style={{ width: 40, height: 40 }} />
+            </View>
+          </Marker>
         }
-        content={
-          <Control
-            name={'Pri Hugeji'}
-            location={'Jurovski Dol'}
-            date={'16.5.2024'}
-            description={'Radar in kontrola alkohola!'}
-            type={'radar'}
-            upVotes={10}
-            downVotes={0}
-          />
-        }
+        content={content}
       />
     </Pressable>
   );
