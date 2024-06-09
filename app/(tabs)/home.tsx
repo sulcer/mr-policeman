@@ -7,10 +7,11 @@ import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as geolib from 'geolib';
 import Toast from 'react-native-toast-message';
+import { getGeoLocation } from '@/api/geoLocation';
 
 const Home = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
-    null
+    null,
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -30,7 +31,7 @@ const Home = () => {
           { distanceInterval: 10 },
           (newLocation) => {
             setLocation(newLocation);
-          }
+          },
         );
 
         return () => {
@@ -63,7 +64,7 @@ const Home = () => {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
         },
-        { latitude: 46.6048288, longitude: 15.7869497 }
+        { latitude: 46.6048288, longitude: 15.7869497 },
       );
 
       console.log('Distance:', distance);
@@ -85,11 +86,19 @@ const Home = () => {
     }
   }, [location]);
 
+  const [search, setSearch] = useState('');
+  const [mapLocation, setMapLocation] = useState<{ lat: number, lon: number }>();
+
+  const onSubmitSearch = async () => {
+    const geo = await getGeoLocation(search);
+    setMapLocation({ lat: geo.lat, lon: geo.lon });
+  };
+
   return (
     <View className={'flex-1 w-full relative'}>
-      <SearchBar />
+      <SearchBar onSubmit={onSubmitSearch} value={search} onChangeText={setSearch} />
       <Navbar />
-      <Map />
+      <Map location={mapLocation} />
     </View>
   );
 };

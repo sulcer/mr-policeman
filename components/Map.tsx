@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MapView from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import PinMarker from '@/components/PinMarker';
@@ -8,16 +8,37 @@ import { useControls } from '@/api/controls';
 import Control from '@/components/Control';
 import RadarImage from '@/assets/images/radar.png';
 import GunImage from '@/assets/images/gun.png';
-import { useSession } from '@/hooks/useSession';
 
 
-const Map = () => {
+interface MapProps {
+  location?: {
+    lat: number
+    lon: number
+  };
+}
+
+const Map = ({ location }: MapProps) => {
   const { data: radars } = useRadars();
-  const { data: controls,refetch } = useControls();
+  const { data: controls, refetch } = useControls();
+  const mapRef = React.createRef<MapView>();
+
+  useEffect(() => {
+    if (location) {
+      console.log('animating');
+      mapRef.current?.animateToRegion({
+        latitude: location.lat,
+        longitude: location.lon,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    }
+
+  }, [location]);
+
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}>
+      <MapView showsUserLocation={true} ref={mapRef} style={styles.map}>
         {radars.map((radar) => (
           <PinMarker
             image={RadarImage}
@@ -27,7 +48,7 @@ const Map = () => {
             content={<RadarInfo radar={radar} />}
           />
         ))}
-        {controls.map((control) => (
+        {controls?.map((control) => (
           <PinMarker
             image={GunImage}
             key={control.id}
