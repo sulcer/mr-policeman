@@ -1,5 +1,11 @@
 import { apiInstance } from '@/api/axios';
-import { QueryClient, useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 
 export type Control = {
   id: string;
@@ -41,18 +47,20 @@ export const downVoteControl = async (id: string) => {
 };
 
 
-export const useControls = () => {
+export const useControls = (opts?: Omit<UseQueryOptions<Control[], Error, Control[], string[]>, 'queryKey'>) => {
   return useQuery({
     initialData: [],
     queryKey: ['controls'],
     queryFn: getControls,
+    ...opts,
   });
 };
 
-export const useCreateControl = () => {
+export const useCreateControl = (opts?: UseMutationOptions<any, Error, CreateControlDto, unknown>) => {
   return useMutation({
     mutationKey: ['create-control'],
     mutationFn: createControl,
+    ...opts,
   });
 };
 
